@@ -1,10 +1,11 @@
 import pygame
 import random
 import sys
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main():
     pygame.init()
@@ -13,10 +14,13 @@ def main():
     updatable, drawable = pygame.sprite.Group(), pygame.sprite.Group()
     Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2)
+    print(f"VECTOR: {pygame.math.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2)}")
     asteroids = pygame.sprite.Group()
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     field = AsteroidField()
+    shots = pygame.sprite.Group()
+    Shot.containers = (shots, updatable, drawable)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

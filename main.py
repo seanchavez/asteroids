@@ -1,5 +1,6 @@
 import pygame
 import random
+import sys
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS
 from player import Player
 from asteroid import Asteroid
@@ -23,6 +24,10 @@ def main():
         screen.fill("#000000")
         for u in updatable:
             u.update(dt)
+        for a in asteroids:
+            if a.is_colliding(player):
+                print("Game over!")
+                sys.exit()
         for d in drawable:
             d.draw(screen)
         pygame.display.flip()

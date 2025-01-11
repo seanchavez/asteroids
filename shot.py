@@ -12,3 +12,16 @@ class Shot(CircleShape):
     def update(self, dt):
         self.position += self.velocity * dt
 
+def count_nested_levels(nested_documents, target_document_id, level=1):
+    for doc_id in nested_documents.keys():
+        if doc_id == target_document_id:
+            return level
+        elif isinstance(nested_documents[doc_id], dict):
+            n_level = count_nested_levels(
+            nested_documents[doc_id], target_document_id, level + 1
+            )
+            if n_level == -1:
+                continue
+            else:
+                return n_level
+    return -1

@@ -29,9 +29,16 @@ class Player(CircleShape):
         # right_edge = pygame.math.Vector2(width, 0)
         # bottom_edge = pygame.math.Vector2(0, height)
         # left_edge = pygame.math.Vector2(0, 0)
-        # forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
-        # if self.position > right
+        if self.position.x > SCREEN_WIDTH:
+            self.position.x = 0
+        if self.position.x < 0:
+            self.position = SCREEN_WIDTH
+        if self.position.y > SCREEN_HEIGHT:
+            self.position.y = 0
+        if self.position.y < 0:
+            self.position.y = SCREEN_HEIGHT
 
     def update(self, dt):
         self.timer -= dt

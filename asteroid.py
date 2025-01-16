@@ -13,14 +13,16 @@ class Asteroid(CircleShape):
 
     def update(self, dt):
         self.position += self.velocity * dt
+        width_vector = pygame.Vector2(SCREEN_WIDTH, 0)
+        height_vector = pygame.Vector2(0, SCREEN_HEIGHT)
         if self.position.x - self.radius > SCREEN_WIDTH:
-            self.position.x = -self.radius
+            self.position -= width_vector
         elif self.position.x + self.radius < 0:
-            self.position.x = SCREEN_WIDTH + self.radius
+            self.position += width_vector
         if self.position.y - self.radius > SCREEN_HEIGHT:
-            self.position.y = -self.radius
+            self.position -= height_vector
         elif self.position.y + self.radius < 0:
-            self.position.y = SCREEN_HEIGHT + self.radius
+            self.position += height_vector
 
     def split(self):
         self.kill()
